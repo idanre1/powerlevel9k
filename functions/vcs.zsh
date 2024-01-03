@@ -105,9 +105,10 @@ function +vi-git-tagname() {
 # Port from https://github.com/whiteinge/dotfiles/blob/5dfd08d30f7f2749cfc60bc55564c6ea239624d9/.zsh_shouse_prompt#L268
 function +vi-git-stash() {
   if [[ -s "${vcs_comm[gitdir]}/logs/refs/stash" ]] ; then
-    local -a stashes=( "${(@f)"$(<${vcs_comm[gitdir]}/logs/refs/stash)"}" )
-    hook_com[misc]+=" $(print_icon 'VCS_STASH_ICON')${#stashes}"
-  fi
+    # local -a stashes=( "${(@f)"$(<${vcs_comm[gitdir]}/logs/refs/stash)"}" )
+    # hook_com[misc]+=" $(print_icon 'VCS_STASH_ICON')${#stashes}"
+    stashes=` wc -l ${vcs_comm[gitdir]}/logs/refs/stash | cut -d' ' -f1 `
+    hook_com[misc]+=" $(print_icon 'VCS_STASH_ICON')${stashes}"  fi
 }
 
 function +vi-hg-bookmarks() {
